@@ -10,7 +10,7 @@ public class UsePong {
         JFrame frame = new JFrame("Pong");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(p);
-        frame.pack();        
+        frame.pack();  
         frame.setSize(500,500);
         frame.setVisible(true);
         
