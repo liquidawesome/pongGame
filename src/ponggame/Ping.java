@@ -10,10 +10,19 @@ public class Ping extends JPanel implements ActionListener, KeyListener{
     /*Variables*/
     Timer t = new Timer(10, this);
     
+    int code;
+    
     double width = this.getWidth(), height = this.getHeight();
     
-    double ballx = 250, bally = 200;
-    double xspeed = 2.5, yspeed = 1.5;
+    int x = 0;
+    int y = 0;
+    int score1 = 0, score2 = 0;
+    
+    double[]xspeeds = {2.5,-2.5,0};
+    double[]yspeeds = {1.5,-1.5,0};
+    
+    double ballx = 200, bally = 200;
+    double xspeed = xspeeds[x], yspeed = yspeeds[x];
     
     Rectangle2D ball;
     Rectangle2D p1;
@@ -35,29 +44,93 @@ public class Ping extends JPanel implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent e){
         repaint();
         
-        if(ballx >= 470 || ballx <= 0)
-            xspeed = -xspeed;
-        if(bally >= 440 || bally <= 0)
-            yspeed = -yspeed;
+        //HIT P1 PADDLE
+        if(ballx >= 415 && (bally >= p1y && bally <= p1.getMaxY() )){
+            if(x < 1)
+                x++;
+            else if(x >= 1)
+                x = 0;
+        }
         
-        ballx += xspeed;
-        bally += yspeed;
+        //HIT P2 PADDLE
+        if(ballx <= 35 && (bally >= p2y && bally <= p2.getMaxY() )){
+            if(x < 1)
+                x++;
+            else if(x >= 1)
+                x = 0;
+        }
+        
+        
+        //TOP+BOTTOM BOUNDS
+        if(bally >= 440 || bally <= 0){
+            if(y < 1)
+                y++;
+            else if(y >= 1)
+                y = 0;
+        }
+            
+        //OUT OF BOUNDS
+        if(ballx <= -20){
+            x = 2;
+            y = 2;
+            score1++;
+            
+            reset();
+            x = 0;
+            y = 0;
+        }//P1 WIN
+        
+        if(ballx >= 500){
+            x = 2;
+            y = 2;
+            score2++;
+            
+            reset();
+            x = 1;
+            y = 1;
+        }//P2 WIN
+        
+        ballx += xspeeds[x];
+        bally += yspeeds[y];
             
         
     }//end actionPerformed
     
     public void keyPressed(KeyEvent k){
-        int code = k.getKeyCode();
+        code = k.getKeyCode();
         
         if(code == KeyEvent.VK_UP){
-            
-        }//UP
+            if(p1y > 0)
+                p1y -= 20;
+        }//P1 UP
         if(code == KeyEvent.VK_DOWN){
-            
-        }//DOWN
-    }
+            if(p1y < 360)    
+                p1y += 20;
+        }//P1 DOWN
+        
+        if(code == KeyEvent.VK_W){
+            if(p2y > 0)
+                p2y -= 20;
+        }//P2 UP
+        if(code == KeyEvent.VK_S){
+            if(p2y < 360)    
+                p2y += 20;
+        }//P2 DOWN
+        if(code == KeyEvent.VK_SPACE){
+            reset();
+        }
+    }//end keyPressed
     public void keyTyped (KeyEvent k){}
     public void keyReleased (KeyEvent k){}
+    
+    
+    public void reset(){
+        
+        
+        ballx = 200;
+        bally = 200;
+        
+    }//reset ball
     
     public void paint(Graphics g){
         super.paint(g);
@@ -67,6 +140,10 @@ public class Ping extends JPanel implements ActionListener, KeyListener{
         ball = new Rectangle2D.Double(ballx,bally,20,20);
         p1 = new Rectangle2D.Double(435,p1y,20,100);
         p2 = new Rectangle2D.Double(15,p2y,20,100);
+        
+        g2.setPaint(Color.RED);
+        g2.drawString(""+score1, 460, 20);
+        g2.drawString(""+score2, 10, 20);
         
         
         g2.setPaint(Color.WHITE);

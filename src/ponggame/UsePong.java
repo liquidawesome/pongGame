@@ -9,9 +9,8 @@ public class UsePong {
         Ping p = new Ping();
         JFrame frame = new JFrame("Pong");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(p);
-        frame.pack();  
         frame.setSize(500,500);
+        frame.add(p);
         frame.setVisible(true);
         
         frame.setLocation(550,200);
