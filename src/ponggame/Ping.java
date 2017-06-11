@@ -16,6 +16,10 @@ public class Ping extends JPanel implements ActionListener, KeyListener{
     
     int x = 0;
     int y = 0;
+    
+    int pausex = 0;
+    int pausey = 0;
+    
     int score1 = 0, score2 = 0;
     
     double[]xspeeds = {2.5,-2.5,0};
@@ -136,19 +140,16 @@ public class Ping extends JPanel implements ActionListener, KeyListener{
     }//reset ball
     
     public void pause(){
-        int prev_x = 0;
-        int prev_y = 0;
-        
         if(x != 2 && y != 2){
-            prev_x = x;
-            prev_y = y;
+            pausex = x;
+            pausey = y;
             
             x = 2;
             y = 2;
         }
         else{
-            x = prev_x;
-            y = prev_y;
+            x = pausex;
+            y = pausey;
         }
         
         
