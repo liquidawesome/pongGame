@@ -116,8 +116,12 @@ public class Ping extends JPanel implements ActionListener, KeyListener{
             if(p2y < 360)    
                 p2y += 20;
         }//P2 DOWN
+        
         if(code == KeyEvent.VK_SPACE){
             reset();
+        }
+        if(code == KeyEvent.VK_P){
+            pause();
         }
     }//end keyPressed
     public void keyTyped (KeyEvent k){}
@@ -126,11 +130,29 @@ public class Ping extends JPanel implements ActionListener, KeyListener{
     
     public void reset(){
         
-        
         ballx = 200;
         bally = 200;
         
     }//reset ball
+    
+    public void pause(){
+        int prev_x = 0;
+        int prev_y = 0;
+        
+        if(x != 2 && y != 2){
+            prev_x = x;
+            prev_y = y;
+            
+            x = 2;
+            y = 2;
+        }
+        else{
+            x = prev_x;
+            y = prev_y;
+        }
+        
+        
+    }//pause game
     
     public void paint(Graphics g){
         super.paint(g);
