@@ -1,13 +1,13 @@
 # pongGame
-Doing my best to make a pong (or pong-like) game in Java
-Just for fun.
+Doing my best to make a pong (or pong-like) game in Java </br>
+Just for fun. </br>
 
 # Controls
-W - Player 1 Up
-S - Player 1 Down
+W - Player 1 Up </br>
+S - Player 1 Down </br>
 
-Up - Player 2 Up
-Down - Player 2 Down
+Up - Player 2 Up </br>
+Down - Player 2 Down </br>
 
-Space - Reset Ball
-P - Pause Game
+Space - Reset Ball </br>
+P - Pause Game </br>
